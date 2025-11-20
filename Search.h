@@ -23,11 +23,11 @@ void printArray(const T arr[], int n) {
 //    return false otherwise
 template <typename T>
 bool seqSearch(string target, string arr[], int start, int end) {
-    if (start < 0 || end <= 0) { 
+    if (start < 0 || end <= start) { 
         return false;
     }
 
-    for (int i = start; i < end; i++) {
+    for (int i = start; i <= end; i++) {
         if (arr[i] == target) { 
             return true;
         }
@@ -121,7 +121,10 @@ int minFind(double darray[], int n) {
 
 void newSort(double darray[], int n) {
     for (int i = 0; i < n - 1; i++) { 
-        int midIndex = minFind(darray, n);
+        int offset = minFind(darray + i, n - i);
+
+        int midIndex = i + offset;
+
         swap(darray, i, midIndex);
     }
 }
